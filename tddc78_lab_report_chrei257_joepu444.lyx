@@ -332,7 +332,7 @@ Christian Einarsson
 \begin_inset Text
 
 \begin_layout Plain Layout
-Added code notes for openmp
+Added code notes for openmp and mpi-filter
 \end_layout
 
 \end_inset
@@ -3002,6 +3002,66 @@ Source code notes
 
 \begin_layout Chapter
 Image filter (MPI)
+\end_layout
+
+\begin_layout Description
+blurfilter.c 
+\end_layout
+
+\begin_layout Description
+blurfilter.h 
+\end_layout
+
+\begin_layout Description
+debug.c 
+\end_layout
+
+\begin_layout Description
+debug.h 
+\end_layout
+
+\begin_layout Description
+gaussw.c 
+\end_layout
+
+\begin_layout Description
+gaussw.h 
+\end_layout
+
+\begin_layout Description
+mpi.filtermain.c 
+\end_layout
+
+\begin_layout Description
+partition.c 
+\end_layout
+
+\begin_layout Description
+partition.h 
+\end_layout
+
+\begin_layout Description
+pixel.c 
+\end_layout
+
+\begin_layout Description
+pixel.h 
+\end_layout
+
+\begin_layout Description
+ppmio.c 
+\end_layout
+
+\begin_layout Description
+ppmio.h 
+\end_layout
+
+\begin_layout Description
+thresfilter.c 
+\end_layout
+
+\begin_layout Description
+thresfilter.h 
 \end_layout
 
 \begin_layout Chapter
