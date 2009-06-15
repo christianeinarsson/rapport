@@ -94,8 +94,8 @@ thedate
 \end_layout
 
 \begin_layout Abstract
-A report over labs in parallel computing with program description and execution
- times.
+A report on labs in parallel computing.
+ Includes program description, example execution times and code notes.
 \end_layout
 
 \begin_layout Chapter*
@@ -1415,6 +1415,35 @@ As can be seen, the pressure remains fairly constant, which it should.
  time sum show that there are improvement when using several nodes.
 \end_layout
 
+\begin_layout Section
+Possible improvements
+\end_layout
+
+\begin_layout Itemize
+Keeping the list of current particles sorted in x or y order would eliminate
+ most collision check.
+ Anything that is more than two units further away along the same axis could
+ be skipped as a collision isn't possible.
+\end_layout
+
+\begin_layout Itemize
+Particles that initially have a distance less than 
+\begin_inset Formula $MaxVelocity\times Steps$
+\end_inset
+
+ to all walls units cannot affect the pressure and could be removed completly
+ from the calculations.
+\end_layout
+
+\begin_layout Itemize
+Particles that initually have a distance less than 
+\begin_inset Formula $Velocity\times Steps$
+\end_inset
+
+ to all walls or slice limits can be excluded from all wall and limit checks.
+ They still need to be checked for particle-to-particle collisions though.
+\end_layout
+
 \begin_layout Chapter
 Tools
 \end_layout
@@ -1444,7 +1473,7 @@ Tools
 \end_layout
 
 \begin_layout Part
-Source code
+Source code notes
 \end_layout
 
 \begin_layout Chapter
@@ -1461,6 +1490,84 @@ Heat equation (OpenMP)
 
 \begin_layout Chapter
 Particles (MPI)
+\end_layout
+
+\begin_layout Description
+build.sh Run to build the program.
+ Execute 
+\emph on
+./build.sh -n 
+\emph default
+a
+\emph on
+ -N 
+\emph default
+b, where 
+\emph on
+a
+\emph default
+ is the initial number of particles per processor and 
+\emph on
+b
+\emph default
+ is the size of the particle buffers.
+ Output is 
+\emph on
+./gaslaw_
+\emph default
+a
+\emph on
+_
+\emph default
+b.
+\end_layout
+
+\begin_layout Description
+coordinate.h Defines the coordiante and wall/slice limit structs.
+ Coordinates are essentially particles.
+\end_layout
+
+\begin_layout Description
+debug.c Debug print out helper.
+\end_layout
+
+\begin_layout Description
+debug.h
+\end_layout
+
+\begin_layout Description
+definitions.h Some constants, like container wall lengths, maximum velocity
+ and the slice data struct used for sending statistics to the master.
+\end_layout
+
+\begin_layout Description
+gaslaw.c Contains the main entry method.
+\end_layout
+
+\begin_layout Description
+physics.c The collision and slice limit checking methods.
+\end_layout
+
+\begin_layout Description
+physics.h
+\end_layout
+
+\begin_layout Description
+README
+\end_layout
+
+\begin_layout Description
+test.sh Build or run a series of tests on different number of particles.
+ To build on the login node before running, use 
+\emph on
+./test.sh -b.
+
+\emph default
+ To run in a batch job script or interactive job shell just use 
+\emph on
+./test.sh
+\emph default
+.
 \end_layout
 
 \begin_layout Chapter
