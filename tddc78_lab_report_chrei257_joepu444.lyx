@@ -1,4 +1,4 @@
-#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.1 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -104,7 +104,7 @@ History
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="4">
+<lyxtabular version="3" rows="5" columns="4">
 <features islongtable="true">
 <column alignment="left" valignment="top" width="0">
 <column alignment="left" valignment="top" width="0">
@@ -262,6 +262,44 @@ Added possible improvements, execution times and source code notes for particles
 \end_inset
 </cell>
 </row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.4.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2009-06-16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Christian Einarson
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wrote about openmp and some clarification on partitioning for blur in mpi.filter
+\end_layout
+
+\end_inset
+</cell>
+</row>
 </lyxtabular>
 
 \end_inset
@@ -307,10 +345,12 @@ In the case of the threshold filter, this is an evenly sized slice of the
 \end_layout
 
 \begin_layout Standard
-The blur filter requires a larger portion of the image than what it produces.
+The blur filter requires a larger portion of the image than it produces.
  First, the normal, evenly sized slice is calculated.
- Then, apart from the very top and bottom parts of the image, more the are
- is expanded to allow for the radius beyond the resulting slice image size.
+ Then blocks with the height of the radius is added above and below.
+ Of course this takes in how much picture there are surrounding the block,
+ we don't want to send data appearing in the memory before or after the
+ actual picture.
 \end_layout
 
 \begin_layout Section
@@ -400,6 +440,546 @@ The blur filter synchronizes after the Gaussian weights have been applied
 
 \begin_layout Chapter
 Heat equation (OpenMP)
+\end_layout
+
+\begin_layout Section
+The jacobi algorithm
+\end_layout
+
+\begin_layout Standard
+The algorithm used to calculate the heat distribution in this lab is the
+ Jacobi algorithm.
+ In each iteration this algorithm calculates a cells new value by summing
+ the values from the four adjoining cells and dividing by four.
+ This is then repeated until the maximum difference between the old and
+ new values are below a certain predefined level.
+\end_layout
+
+\begin_layout Section
+Implementation
+\end_layout
+
+\begin_layout Standard
+Our implementation uses two matrices one for reading and one for writing
+ alternating them every iteration to avoid having to copy them around.
+ The use of two matrices has the advantages that it is very easy to synchronize
+ the algorithm and that all calculations in each iteration are completely
+ independent.
+ Both synchronization and independence would be harder to achieve in just
+ one matrix.
+ We moved the calculation of one step of the algorithm into a subroutine
+ making it easy to call that subroutine and alternate which matrix should
+ be read and which should be written.
+\end_layout
+
+\begin_layout Section
+Parallelization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Parallelization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have parallelized two parts of the given serial code.
+ First the initialization of the matrices which have been made independent
+ and divided into OpenMP sections.
+ This gave a very moderate speedup probably because the task of assigning
+ a value to a couple of thousand cells is a very fast operation and therefore
+ not really worth parallelizing.
+ Secondly we parallelized the inner loop of the algorithm
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The outer loop is as far as we can see not parallelizable since you should
+ be able to break free of it.
+\end_layout
+
+\end_inset
+
+.
+ All the steps in this loop are independent
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Assuming our solution with two matrices.
+\end_layout
+
+\end_inset
+
+ and therefore very easy to parallelize with the following code.
+\end_layout
+
+\begin_layout LyX-Code
+!$omp  parallel do default(shared) schedule(guided, 1) reduction(MAX:error)
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout LyX-Code
+!$omp end parallel do
+\end_layout
+
+\begin_layout Standard
+Since the do loop is the only thing we want to parallelize we use the combined
+ 
+\emph on
+parallel do
+\emph default
+ instruction.
+ We state that all variables should be 
+\emph on
+shared
+\emph default
+ except 
+\emph on
+error
+\emph default
+, this is fine since the only shared variable that will be written to is
+ one of the matrices and every thread have their own place to write.
+ For keeping track of the maximum error for the whole calculation we use
+ private error instances of the error variables each one containing the
+ maximal error encountered in that thread.
+ When all threads are done a reduce max operation are done on the private
+ instances of 
+\emph on
+error 
+\emph default
+so that after the parallel region 
+\emph on
+error 
+\emph default
+will contain the maximum error.
+\end_layout
+
+\begin_layout Standard
+For partitioning the steps of the 
+\emph on
+do-loop
+\emph default
+ on to separate threads the guided schedule are used.
+ This makes the first partition rather large, the next is a litle bit smaler
+ and the one after that even smaler until it reaches the specified smallest
+ chunk size, in this case one.
+ We have experimented with larger chunk sizes but we did not se any notable
+ speedup.
+\end_layout
+
+\begin_layout Subsection
+Synchronization
+\end_layout
+
+\begin_layout Standard
+By using the two matrices approach we can rely on OpenMP to take care of
+ any needed read or write synchronization on them.
+ In fact all our variables are shared except error and the only ones written
+ to in parallel regions are the matrices and 
+\emph on
+error
+\emph default
+.
+ The error is stored private and combined using reduce max as maentioned
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Parallelization"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Speedup
+\end_layout
+
+\begin_layout Standard
+In table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Timing-of-Heat-1000"
+
+\end_inset
+
+ and table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Timing-of-Heat-10000"
+
+\end_inset
+
+ we list the execution times for the parallelized parts of the program.
+ It is easy to se that for one to eight threads the speedup is near linerar,
+ a lessening of the speedup is hinted on eight threads but without the posibilit
+y to run the program on more threads we find that hard to verfy.
+ 
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Threads
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initizilization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Algorithm
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0209 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.8911 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0125 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.9843 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0147 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0969 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.175 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.2374 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Timing-of-Heat-1000"
+
+\end_inset
+
+Timing of Heat eqn.
+ n=1000
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Threads
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initizilization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Algorithm
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2161 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+762.4720 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2235 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+398.2021 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1913 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+212.4406 s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Timing-of-Heat-10000"
+
+\end_inset
+
+Timing of Heat eqn.
+ n=10000
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Improwments
+\end_layout
+
+\begin_layout Standard
+When we wrote down the algorithm for this report.
+ We realized there is a way to implement this algorithm in parallel without
+ the need for a second matix.
+ If the matrix is imagined as a chessboard it is posible to update all the
+ blacksquares independently and after that you could update all the whitesquares
+ idependently.
+ We are at the moment unsure on how much speedup one could gain with this
+ aproach using only 8 threads.
+ But it would at least cut the memory usage i half.
 \end_layout
 
 \begin_layout Chapter
