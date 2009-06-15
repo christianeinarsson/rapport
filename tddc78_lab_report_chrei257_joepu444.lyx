@@ -9,7 +9,7 @@
 
 % Det är på följande två rader som datum och version ändras.
 \newcommand{\docdate}{2009-06-15}
-\newcommand{\docver}{0.4.0}
+\newcommand{\docver}{0.4.1}
 
 % Ändra ej nedan!
 \input{template_prefs.tex}
@@ -104,7 +104,7 @@ History
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="4">
+<lyxtabular version="3" rows="6" columns="4">
 <features islongtable="true">
 <column alignment="left" valignment="top" width="0">
 <column alignment="left" valignment="top" width="0">
@@ -263,11 +263,49 @@ Added possible improvements, execution times and source code notes for particles
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 0.4.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2009-06-16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Christian Einarson
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wrote about openmp and some clarification on partitioning for blur in mpi.filter
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.4.1
 \end_layout
 
 \end_inset
@@ -285,7 +323,7 @@ Added possible improvements, execution times and source code notes for particles
 \begin_inset Text
 
 \begin_layout Plain Layout
-Christian Einarson
+Christian Einarsson
 \end_layout
 
 \end_inset
@@ -294,7 +332,7 @@ Christian Einarson
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wrote about openmp and some clarification on partitioning for blur in mpi.filter
+Added code notes for openmp
 \end_layout
 
 \end_inset
@@ -2972,6 +3010,22 @@ Image filter (pthreads)
 
 \begin_layout Chapter
 Heat equation (OpenMP)
+\end_layout
+
+\begin_layout Description
+build.parallel.sh Builds the parallel code.
+\end_layout
+
+\begin_layout Description
+build.serial.sh Builds the serial reference code.
+\end_layout
+
+\begin_layout Description
+OpenMP-HTF.parallel.f90 Contains the complete parallel code.
+\end_layout
+
+\begin_layout Description
+OpenMP-HTF.serial.f90 Contains the complete serial reference code.
 \end_layout
 
 \begin_layout Chapter
