@@ -9,7 +9,7 @@
 
 % Det är på följande två rader som datum och version ändras.
 \newcommand{\docdate}{2009-06-16}
-\newcommand{\docver}{0.5.0}
+\newcommand{\docver}{0.6.0}
 
 % Ändra ej nedan!
 \input{template_prefs.tex}
@@ -104,7 +104,7 @@ History
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
+<lyxtabular version="3" rows="8" columns="4">
 <features islongtable="true">
 <column alignment="left" valignment="top" width="0">
 <column alignment="left" valignment="top" width="0">
@@ -339,7 +339,7 @@ Added code notes for openmp and mpi-filter
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -353,6 +353,80 @@ Added code notes for openmp and mpi-filter
 \noun off
 \color none
 0.5.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+2009-06-16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+Joel Purra
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+Added execution times and source code notes for image filters.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+0.6.0
 \end_layout
 
 \end_inset
@@ -406,7 +480,7 @@ Joel Purra
 \bar no
 \noun off
 \color none
-Added execution times and source code notes for image filters.
+Some information on tools.
 \end_layout
 
 \end_inset
@@ -2237,6 +2311,46 @@ Particles that initually have a distance less than
 Tools
 \end_layout
 
+\begin_layout Section
+ToolWorks TotalView
+\end_layout
+
+\begin_layout Standard
+We tried using TotalView, but didn't manage to run our program within it
+ - therefor we are unable to answer the question on how it compares to a
+ normal debugging environment.
+ We have used idb and gdb, which have been sufficient in tracking down what
+ has haunted us the most - segmentation faults.
+ But, as they are text based, they do not offer the ease-of-use one would
+ prefer over advanced - but hard to use - functions.
+\end_layout
+
+\begin_layout Section
+Intel Trace Analyzer and Collector
+\end_layout
+
+\begin_layout Description
+trace_filter_mpi_function_blur_n4_r1000.png Blurring the entire image with
+ a blur radius of 1000.
+ All image data is sent to all nodes by the master node.
+ Calculations take about the same amount of time before finally collecting
+ the image parts to the master node again.
+\end_layout
+
+\begin_layout Description
+trace_particles_pressure_graph_n8_p1250.png A graph over how the pressure
+ rises at wall collisions per node.
+ The two highest lines are the top and bottom slices as they have a lot
+ more wall than the others.
+\end_layout
+
+\begin_layout Description
+trace_particles_function_timeline_n8_p1250.png Time spent in different parts
+ of the code plus node intercommunication lines.
+ The most time (cyan) is spent in calculations to find collisions, primarily
+ between particles; time to send particles between nodes is relatively small.
+\end_layout
+
 \begin_layout Part
 Execution time
 \end_layout
@@ -3844,6 +3958,10 @@ Execution data
 Tools
 \end_layout
 
+\begin_layout Standard
+Trace files for the above particle lab executions are available on request.
+\end_layout
+
 \begin_layout Part
 Source code notes
 \end_layout
@@ -4091,7 +4209,8 @@ definitions.h Some constants, like container wall lengths, maximum velocity
 \end_layout
 
 \begin_layout Description
-gaslaw.c Contains the main entry method.
+gaslaw.c Contains the main entry method with MPI, ITAC and particle initiation,
+ the main loop, all communications and most tracing.
 \end_layout
 
 \begin_layout Description
@@ -4122,6 +4241,10 @@ test.sh Build or run a series of tests on different number of particles.
 
 \begin_layout Chapter
 Tools
+\end_layout
+
+\begin_layout Standard
+See the source files of the particles lab.
 \end_layout
 
 \end_body
