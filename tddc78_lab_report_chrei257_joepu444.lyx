@@ -1,0 +1,1471 @@
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage[nofancy]{svninfo}
+\svnInfo $Id: tddc78_lab_report_chrei257_joepu444.lyx 1 2009-06-14 08:50:00Z joepu444 $
+
+% Det är på följande två rader som datum och version ändras.
+\newcommand{\docdate}{2009-06-14}
+\newcommand{\docver}{0.2.0}
+
+% Ändra ej nedan!
+\input{template_prefs.tex}
+\end_preamble
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "TDDC78 Lab report"
+\pdf_author "Christian Einarsson chrei257, Joel Purra joepu444"
+\pdf_subject "Abstract A report over labs in parallel computing with program description and execution times."
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\topmargin 4cm
+\bottommargin 4cm
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes true
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+TDDC78 Lab report
+\end_layout
+
+\begin_layout Author
+Christian Einarsson chrei257, Joel Purra joepu444
+\end_layout
+
+\begin_layout Date
+
+\size small
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thedate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+A report over labs in parallel computing with program description and execution
+ times.
+\end_layout
+
+\begin_layout Chapter*
+History
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features>
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Version
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Date
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Author
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Changes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2009-06-14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Joel Purra
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initiated document
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2009-06-14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Joel Purra
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Added program descriptions for image filters and particles
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Program descriptions
+\end_layout
+
+\begin_layout Chapter
+Image filter (MPI)
+\end_layout
+
+\begin_layout Standard
+The image is divided into horizontal slices, which each node filter on their
+ own.
+\end_layout
+
+\begin_layout Section
+Slicing image
+\end_layout
+
+\begin_layout Standard
+Each node receives just enough image to do the filter calculations.
+ Image slice size information is sent to the nodes using MPI_Bcast, data
+ is sent to the nodes using MPI_Scatterv.
+\end_layout
+
+\begin_layout Standard
+In the case of the threshold filter, this is an evenly sized slice of the
+ image.
+\end_layout
+
+\begin_layout Standard
+The blur filter requires a larger portion of the image than what it produces.
+ First, the normal, evenly sized slice is calculated.
+ Then, apart from the very top and bottom parts of the image, more the are
+ is expanded to allow for the radius beyond the resulting slice image size.
+\end_layout
+
+\begin_layout Section
+Filter
+\end_layout
+
+\begin_layout Standard
+For the threshold, an average pixel color value is calculated per slice.
+ This value is then added in each node using MPI_Allreduce and divided over
+ the number of slices.
+ The threshold filter is then applied to the image, which will be black
+ and white.
+\end_layout
+
+\begin_layout Standard
+In blur, the value is calculated in two steps.
+ First, the Gaussian weights are applied to each pixel along the horizontal
+ axis.
+ In the second step, it is applied in the horizontal axis.
+ This is done to avoid having to calculate a full 
+\begin_inset Formula $radius^{2}$
+\end_inset
+
+ square around each pixel; this way, it's only a cross is calculated per
+ pixel.
+\end_layout
+
+\begin_layout Section
+Collect image
+\end_layout
+
+\begin_layout Standard
+After the filters are done, the image is re-assembled again using MPI_Gatherv.
+\end_layout
+
+\begin_layout Chapter
+Image filter (pthreads)
+\end_layout
+
+\begin_layout Standard
+The image is divided into horizontal slices of an even size for each thread
+ to filter.
+\end_layout
+
+\begin_layout Section
+Shared variables
+\end_layout
+
+\begin_layout Standard
+Both threshold and blur uses shared source and destination images.
+\end_layout
+
+\begin_layout Standard
+Threshold uses a shared pixel component sum that is written to using a mutex.
+\end_layout
+
+\begin_layout Standard
+Blur has no locks - instead it makes sure to write data only to image areas
+ that are considered private.
+ This is done by making sure all threads are reading only from the image
+ T1 when writing to their slice of image T2 and vice versa.
+ In the two-stage blur formula, the image is written in a transposed way
+ to make sure threads only work within their own slice.
+ Thus, locks are eliminated.
+ Also, this helps the cache as reads are done in C style array storage order.
+\end_layout
+
+\begin_layout Section
+Synchronization
+\end_layout
+
+\begin_layout Standard
+Both filters need some synchronization to make sure the right data is written
+ to the shared variables.
+\end_layout
+
+\begin_layout Standard
+The threshold filter synchronizes after the pixel component sums have been
+ calculated and after the filtered image is written.
+\end_layout
+
+\begin_layout Standard
+The blur filter synchronizes after the Gaussian weights have been applied
+ horizontally and then once more after the transposed vertical calculations
+ have been made.
+\end_layout
+
+\begin_layout Chapter
+Heat equation (OpenMP)
+\end_layout
+
+\begin_layout Chapter
+Particles (MPI)
+\end_layout
+
+\begin_layout Standard
+Inside a rectangular container, particles are moving freely from random
+ starting positions, angles and speeds.
+ Their collisions with the walls simulate pressure, which can be used to
+ verify the ideal gas law.
+\end_layout
+
+\begin_layout Standard
+Each MPI node will be responsible for calculations inside a horizontal slice
+ of the rectangle.
+ Each slice is the same size and has the same number of particles from the
+ start.
+\end_layout
+
+\begin_layout Section
+Initiation
+\end_layout
+
+\begin_layout Subsection
+MPI
+\end_layout
+
+\begin_layout Standard
+Two data types are used in the exchange, particles (represented by coordinates)
+ and slice data (to calculate pressure and print a summary).
+\end_layout
+
+\begin_layout Subsection
+Particles
+\end_layout
+
+\begin_layout Standard
+Four arrays with particles (coordinates) are kept per node.
+\end_layout
+
+\begin_layout Itemize
+Current particles in the slice
+\end_layout
+
+\begin_layout Itemize
+Particles to keep after the current time step
+\end_layout
+
+\begin_layout Itemize
+Particles that escaped upwards, to send up
+\end_layout
+
+\begin_layout Itemize
+Particles that escaped downwards, to send down
+\end_layout
+
+\begin_layout Standard
+These list are of fixed size (MAX_NO_PARTICLES) and the memory space is
+ constantly re-used.
+ Counters limit the number of particles accessed per array.
+\end_layout
+
+\begin_layout Subsection
+Vampir Trace
+\end_layout
+
+\begin_layout Standard
+General tracing and counting has been added.
+ In particular, the time steps in the section below are traced as a hierarchy.
+\end_layout
+
+\begin_layout Section
+Time steps
+\end_layout
+
+\begin_layout Standard
+Each node calculates and communicates nodes in each step.
+\end_layout
+
+\begin_layout Subsection
+Particle collisions
+\end_layout
+
+\begin_layout Standard
+A check to find particle-to-particle collisions - the heaviest calculations
+ in this program by far.
+ Each particle is checked pair-wise with all other particles, which mean
+ 
+\begin_inset Formula $n!$
+\end_inset
+
+ collision calculations.
+ The implementation assumes that a particle can only collide with one other
+ particle per time step; if a collision occurs, the rest of the checks for
+ those particles are skipped.
+\end_layout
+
+\begin_layout Standard
+Collision checks are only done if the distance between the particles is
+ 2 units or less.
+\end_layout
+
+\begin_layout Subsection
+Wall collisions and slice limit checks
+\end_layout
+
+\begin_layout Standard
+Each slice has walls, but not all walls.
+ The top and bottom slices have on long wall extra each, but instead they
+ don't have to calculate if particles escape on that side.
+ If a particle hits a wall, it bounces right back and the pressure is added
+ to the slice pressure variable.
+ If a particle exceeds the slice limits, it is moved to the array of particles
+ to be sent to that direction.
+\end_layout
+
+\begin_layout Subsection
+Communication
+\end_layout
+
+\begin_layout Standard
+Each node starts by sending their escaped particles up or down respectively.
+ All nodes then wait at a barrier to make sure no node is left behind, missing
+ particles.
+ After the barrier, all nodes checks their receive buffers for incoming
+ particles, which are then added to the array of kept particles.
+\end_layout
+
+\begin_layout Standard
+The number of particles sent between two slices is unknown until the receive
+ buffers are checked.
+ The MPI_Probe and MPI_Get_count methods provides means to get the number
+ of particles to expect, if any.
+ Since particle buffer sizes are static, no new memory allocation is done,
+ even though possible.
+\end_layout
+
+\begin_layout Section
+Pressure
+\end_layout
+
+\begin_layout Standard
+After all time steps have been iterated the master node gathers data from
+ the other slices and performs the below calculation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+Pressure=\frac{\overset{slices}{\underset{i=1}{\sum}}Pressure_{i}}{WallLength\times TimeSteps}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The pressure is increasing linearly with the number of particles when the
+ container size is fixed.
+\end_layout
+
+\begin_layout Section
+Q&A
+\end_layout
+
+\begin_layout Subsection
+Domain decomposition
+\end_layout
+
+\begin_layout Standard
+The area is 2D and particles fly everywhere at random - why choose slices
+ instead of squares in a matrix?
+\end_layout
+
+\begin_layout Standard
+To minimize the number of sends between nodes.
+ Setup time to send data costs much more than actually sending data - a
+ square would require up to four send/receive pairs per time step instead
+ of two.
+ If the number of nodes and particles increase, a matrix might be justified,
+ but right now data sent per node and side is too small.
+ Besides, the average number of particles per node is close to what was
+ there from the start - it might be different if certain nodes would have
+ a higher concentration through some property of the calculations.
+\end_layout
+
+\begin_layout Standard
+The number of particles passed up and down is fairly even on each node.
+\end_layout
+
+\begin_layout Standard
+The program has only been tested with at least two MPI nodes.
+\end_layout
+
+\begin_layout Subsection
+Speedup
+\end_layout
+
+\begin_layout Standard
+For 2, 4, 6, 8 nodes, 10000 particles per node and an area of 10000 by 10000
+ each MPI node takes 2.9 seconds to calculate all time steps.
+\end_layout
+
+\begin_layout Standard
+What does take time is the tracing - the real time of the program differs
+ from a few seconds to over a minute for a lot of tracing.
+ It seems to be dependent on external factors such as network and disk usage.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="8">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Particles per node
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Width
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Height
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Particles total
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Calculations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pressure
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted pressure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.906 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.08202
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.101e-6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.911 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.16276
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.069e-6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.917 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.25229
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.205e-6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.921 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.33938
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.242e-6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ideal gas law
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+pV=nRT\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ideal gas law states that the number of particles in a container of
+ fixed size affects the pressure in a linear fashion.
+ As can be seen above, in the weighted pressure column, the number of particles
+ make the pressure increase in a linear fashion.
+ The weighted pressure 
+\begin_inset Formula $C$
+\end_inset
+
+ should be the equivalent of
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+C=\frac{RT}{V}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+as 
+\begin_inset Formula $R$
+\end_inset
+
+, 
+\begin_inset Formula $T$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are kept constant.
+ The law is verified.
+\end_layout
+
+\begin_layout Subsection
+Scaled speedup
+\end_layout
+
+\begin_layout Standard
+The scaled speedup is a fixed number of particles over a varying number
+ of nodes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="8">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Particles per node
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Width
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Height
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Particles total
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Calculations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Calculations sum
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pressure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.763 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,526 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04172
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.209 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,836 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04320
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1666
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9996
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.104 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,624 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04384
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1250
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.062 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,496 s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04324
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As can be seen, the pressure remains fairly constant, which it should.
+ Calculation times are getting exponentionally lower and the calculation
+ time sum show that there are improvement when using several nodes.
+\end_layout
+
+\begin_layout Chapter
+Tools
+\end_layout
+
+\begin_layout Part
+Execution time
+\end_layout
+
+\begin_layout Chapter
+Image filter (MPI)
+\end_layout
+
+\begin_layout Chapter
+Image filter (pthreads)
+\end_layout
+
+\begin_layout Chapter
+Heat equation (OpenMP)
+\end_layout
+
+\begin_layout Chapter
+Particles (MPI)
+\end_layout
+
+\begin_layout Chapter
+Tools
+\end_layout
+
+\begin_layout Part
+Source code
+\end_layout
+
+\begin_layout Chapter
+Image filter (MPI)
+\end_layout
+
+\begin_layout Chapter
+Image filter (pthreads)
+\end_layout
+
+\begin_layout Chapter
+Heat equation (OpenMP)
+\end_layout
+
+\begin_layout Chapter
+Particles (MPI)
+\end_layout
+
+\begin_layout Chapter
+Tools
+\end_layout
+
+\end_body
+\end_document

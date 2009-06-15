@@ -1,0 +1,23 @@
+\newcommand{\currdate}{\docdate{}}
+\newcommand{\currver}{\docver{} (revision \svnInfoRevision)}
+
+\newcommand{\thedate}{Date: \currdate\\Version: \currver}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\headheight 35pt 
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{Version: \currver{}}
+\fancyfoot[R]{\currdate}
+}
+
+\fancyhead[LE,RO]{TDDC78}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{Version: \currver{}}
+\fancyfoot[R]{\currdate}
+\usepackage{hyperref}
