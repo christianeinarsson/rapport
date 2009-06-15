@@ -9,7 +9,7 @@
 
 % Det är på följande två rader som datum och version ändras.
 \newcommand{\docdate}{2009-06-15}
-\newcommand{\docver}{0.3.0}
+\newcommand{\docver}{0.4.0}
 
 % Ändra ej nedan!
 \input{template_prefs.tex}
