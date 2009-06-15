@@ -8,8 +8,8 @@
 \svnInfo $Id: tddc78_lab_report_chrei257_joepu444.lyx 1 2009-06-14 08:50:00Z joepu444 $
 
 % Det är på följande två rader som datum och version ändras.
-\newcommand{\docdate}{2009-06-14}
-\newcommand{\docver}{0.2.0}
+\newcommand{\docdate}{2009-06-15}
+\newcommand{\docver}{0.3.0}
 
 % Ändra ej nedan!
 \input{template_prefs.tex}
@@ -105,12 +105,12 @@ History
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="4">
-<features>
+<features islongtable="true">
 <column alignment="left" valignment="top" width="0">
 <column alignment="left" valignment="top" width="0">
 <column alignment="left" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row>
+<column alignment="left" valignment="top" width="50col%">
+<row endhead="true">
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -610,6 +610,14 @@ What does take time is the tracing - the real time of the program differs
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="8">
 <features>
@@ -998,6 +1006,27 @@ Pressure/P
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Execution time with different number of particles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Ideal gas law
 \end_layout
@@ -1060,6 +1089,14 @@ The scaled speedup is a fixed number of particles over a varying number
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="8">
 <features>
@@ -1448,6 +1485,27 @@ Pressure
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Execution time with varying number of nodes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 As can be seen, the pressure remains fairly constant, which it should.
  Calculation times are getting exponentionally lower and the calculation
@@ -1512,6 +1570,14 @@ P is short for particles.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="9">
 <features>
@@ -2281,6 +2347,27 @@ Pressure/P
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Execution data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
